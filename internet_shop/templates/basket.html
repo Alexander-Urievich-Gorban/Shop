@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+                                                    
+            
+{% block basket %}
+    <main>
+    <div class="block main">
+        <div class="inner">
+
+            <div class="content nositebar ">
+                    
+    <div class="breadcrumb">
+        <span><a href="http://new16516747681602.myaddshop.ru/">Главная</a> / </span>
+        <span>Корзина</span>
+    </div>
+    
+    <h1 class="shop-title">Корзина</h1>
+    
+    <div class="promo-descr" style=""></div>
+    {% for order in basket_list %}
+
+    <div id="basket_list">
+
+                        <div class="basket_item_wrapp">
+                        <div class="item_in_basket_titles">
+                                    <div class="title">Наименование товара</div>
+                                    <div class="img"></div>
+                                    <div class="price">Цена</div>
+                                    <div class="quantity">Количество</div>
+                                    <div class="total">Стоимость</div>
+                                    <div class="remove" data-index="0"></div>
+                                </div>
+                                <div class="item_in_basket">
+                                    <div class="image"><img src="{{ order.product.image.url }}"></div>
+                                    <div class="title"><a href="http://new16516747681602.myaddshop.ru/items/zhidkij-chekhol-s-blestkami-prozrachnyj-na-xiaomi-redmi-note-5-note-5-pro/">{{ order.product.title }}</a><br><span class="v_code">
+                                        Код товара: {{ order.product.id }}</span></div>
+                                    <div class="price"><div> </div><span class="">{{ order.product.price }} руб.<span></span></span></div>
+                                    <h6 style="width:150px;text-align:center">{{ order.count_products }}</h6>
+                                    <div class="total"><div class="total_new"></div><span class="" ><h6 style="width:190px;text-align:end">{{ order.cost }} руб.</h6></span>
+                                        <form action="{% url 'delete_one' order.id %}" method="post">
+                                            {% csrf_token %}
+                                            <input hidden="hidden" value="{{ order.id }}" name="id_order">
+                                            <button style="background-color:white;color:black" value="Confirm" name="order" type="submit">Удалить</button>
+                                        </form></div>
+                                    <div class="">  </div>
+                                </div>
+                        </div>
+                            {% endfor %}
+        {% if get_sum %}
+                                </div><div class="basket_end">
+                <div class="left">
+                            <form method="get" action="{% url 'delete_all_from_basket' %}">
+                                <button style="background-color:white;color:black" type="submit" value="Confirm">Очистить карзину</button>
+                            </form>
+                </div>
+                            <div class="right">
+
+                                <div class="total_basket_wrapp"><span>Итоговая сумма: </span><span id="basket_total"><span class="">{{ get_sum }}</span> &nbsp;</span> руб.</div>
+
+                                <a style="font-size:20px" href="http://new16516747681602.myaddshop.ru/checkout/">Оформить заказ</a>
+                            </div>
+                            </div></div>
+    {% endif %}
+
+            </div>
+        </div>
+
+</main>
+
+
+{% endblock basket %}

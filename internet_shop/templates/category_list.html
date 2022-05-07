@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+
+{% block category %}
+
+
+<main>
+    <div class="block main">
+        <div class="inner">
+
+
+            <form method="get">
+                <div class="filter_bar">
+                    <div class="title"><span>ФИЛЬТРЫ</span>
+
+                    </div>
+
+                    {{ filter.form|bootstrap }}
+                    <button style="background-color:white;color:black" type="submit" class="btn btn-primary">search
+                    </button>
+                </div>
+
+
+            </form>
+
+
+            <div class="breadcrumb">
+                <span><a href="/">Главная</a> / </span>
+                <span>{{ category.title }}</span>
+
+
+                <h1 class="categories_title">{{ category.title }}. Найдено {{ category.get_products.count }} варинтов</h1>
+
+
+
+
+
+
+            <div class="sort_show">
+                <div class="items grid items_table">
+                {% for product in filter.qs %}
+
+                <div class="item "
+                     data-discount-type="percent"
+                     data-discount="0.00"
+                     data-code="{{ product.id }}"
+                     data-color="Белый"
+                     data-size="5 inch"
+                     style="max-height:500px;max-width:200px;min-height:500px;min-width:200px">
+
+                    <div class="image">
+                        <div class="item_tags">
+                            <div class="bestseller">Хит продаж</div>
+                        </div>
+                        <div class="bg_dark"></div>
+
+                        <!-- item images -->
+
+                        <!-- default image loading -->
+                        <img src="{{ product.image.url }}"
+                             alt="Жидкий чехол с блестками Прозрачный на Xiaom Redmi Note 5" width="210px"
+                             height="210px" loading="lazy"/>
+
+
+                        <a href="{{ product.get_absolute_url }}"></a>
+                    </div>
+                    <div class="item_content item_price" data-discount="0.00">
+                        <a class="item_link descr" href="{{ product.get_absolute_url }}">{{ product.title }}</a>
+
+                        <div class="item_price_big">
+                            <span class="new">{{ product.price }} руб.</span>
+                        </div>
+                        <div class="btn_wrapp">
+                            <a class="more b-0" href="{{ product.get_absolute_url }}">Подробнее</a>
+
+                        </div>
+
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+
+        </div>
+    </div>
+
+
+</main>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
+<script>
+		$(function () {
+			$(".js-range-slider").ionRangeSlider({
+				onChange: function (instance) {
+					var from = instance.from;
+					var to = instance.to;
+					var $wrapper = $(instance.input[0]).parent().parent();
+					$wrapper.find('input.min').val(from);
+					$wrapper.find('input.max').val(to);
+					// $(instance.input[0]).parent().parent().css({color:'red'});
+					// console.log([from,to,instance]);
+				}
+			});
+			var $ranges = $(".range");
+			$ranges.on("change", function () {
+				var from = $(this).data("from");
+				var to = $(this).data("to");
+				$(this).parent().parent().find('input.min').eq(1).val(from)
+				$(this).parent().parent().find('input.max').eq(1).val(to)
+			});
+		});
+
+</script>
+
+
+{% endblock category %}

@@ -1,0 +1,148 @@
+{% load product_tag %}
+{% load category_tag %}
+{% load static %}
+<header>
+    <div class="header-top">
+        <div class="inner">
+            <div class="left group">
+
+
+                <div class="social">
+            <a target="_blank" href="https://vk.com/addshop_ru" class="link_vk"></a>
+                <a target="_blank" href="https://facebook.com/#" class="link_fb"></a>
+                <a target="_blank" href="https://ok.ru/#" class="link_ok"></a>
+                <a target="_blank" href="https://www.instagram.com/#" class="link_instagram"></a>
+                <a target="_blank" href="https://www.youtube.com/channel/UCWnayeBedSurHOgZFWa9mtg" class="link_youtube"></a>
+                    </div>
+
+                            </div>
+            <div class="menu">
+
+                <ul id="menu_list" class="level_1" style="overflow: visible;">
+                    <li class="li"><a href="http://127.0.0.1:8000/contact/" class="" title="Контакты">Контакты</a></li>
+                    <li class="li"><a href="http://127.0.0.1:8000/payment/" class="" title="Оплата">Оплата</a></li>
+                    <li class="li"><a href="http://127.0.0.1:8000/about/" class="" title="О компании">О компании</a></li></ul>
+
+                <div id="menu-toggler" style="display: none;"><i class="fas fa-caret-down"></i></div>
+                <menu class="menu_p">
+                    <ul id="menu_popup"></ul>
+                </menu>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-middle">
+        <div class="inner">
+            <div class="logo_wrapper">
+                <a href="http://127.0.0.1:8000/" class="logo">
+                                            <img src="{% static 'image/bez-nazvaniya_15743347059933.png' %}" alt="Кейс эксклюзив" width="250px" height="70px" loading="lazy">
+                                    </a>
+                <div class="slogan_wrapper">Чехлы на телефоны</div>
+            </div>
+
+            <div class="triggers">
+                <div class="trigger">
+                    <i class="fas fa-truck"></i>
+                    <span><p>Бесплатная доставка заказа от 800 руб</p>
+</span>
+                </div>
+                <div class="trigger">
+                   <i class="fas fa-cogs"></i>
+                    <span><p>Собственное производство</p>
+</span>
+                </div>
+                <div class="trigger">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <span><p>Особые условия покупки от 5 000 руб</p>
+</span>
+                </div>
+                <div class="trigger">
+                    <i class="fas fa-money-check-alt"></i>
+                    <span><p>Наличный и безналичный расчет</p>
+</span>
+                </div>
+            </div>
+
+            <div class="right group">
+                                    <div class="login_or_reg icon">
+                                        {% if user.is_authenticated %}
+                                        <a href="http://127.0.0.1:8000/accounts/logout/" title="Выход">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        </a>
+                                        {% else %}
+                        <a href="http://127.0.0.1:8000/accounts/login/" title="Вход и регистрация">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        </a>
+                                        {% endif %}
+                    </div>
+
+                <div class="basket icon">
+                    <a href="http://127.0.0.1:8000/basket/" title="Корзина">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                    </a>
+                </div>
+                <div class="mob_menu icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+
+                <div class="menu_popup_mob">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x close"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+
+                    <div class="mob-title">Категории товаров</div>
+                    <div class="categories">
+                        <ul class="level_1">
+                        {% get_category as categories %}
+                        {% for category in categories %}
+                        <li><a href="{{ category.get_absolute_url }}" class="" title="Противоударные чехлы">{{ category.title }}</a>
+                        </li>
+                            {% endfor %}
+                            </ul>
+                    </div>
+
+                    <div class="mob-title">Навигация по сайту</div>
+                    <ul id="menu_mob">
+                                                                        <li class="li"><a href="http://new16516747681602.myaddshop.ru/kontakty/" class="" title="Контакты">Контакты</a></li>
+                                                                                                <li class="li"><a href="http://new16516747681602.myaddshop.ru/oplata/" class="" title="Оплата">Оплата</a></li>
+                                                                                                <li class="li"><a href="http://new16516747681602.myaddshop.ru/o-kompanii/" class="" title="О компании">О компании</a></li>
+                                                                </ul>
+
+                    <div class="mobile-links">
+                        <div class="social">
+            <a target="_blank" href="https://vk.com/addshop_ru" class="link_vk"></a>
+                <a target="_blank" href="https://facebook.com/#" class="link_fb"></a>
+                <a target="_blank" href="https://ok.ru/#" class="link_ok"></a>
+                <a target="_blank" href="https://www.instagram.com/#" class="link_instagram"></a>
+                <a target="_blank" href="https://www.youtube.com/channel/UCWnayeBedSurHOgZFWa9mtg" class="link_youtube"></a>
+                    </div>
+
+
+                                                <div class="phone">
+                            <a href="tel:88000000000"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-phone-call"><path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>8-800-000-00-00</a>
+
+
+
+                        </div>
+
+                                            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-bottom">
+<form method="get" name="search" action="{% url 'search_product' %}">
+                <input name="q" type="search" style="width:540px;height:40px;margin-left:100px;border-color:green" id="search" required="required" placeholder="Что будем искать?">
+
+    <button style="width:140px;height:40px;background-color:green;margin-top:40px">Найти</button>
+</form></div>
+    <div class="header-bottom">
+        <div class="inner">
+
+            <div class="header-categories"><ul class="level_1">
+                {% for category in categories %}
+                <li><a href="{{ category.get_absolute_url }}" class="" title="Противоударные чехлы"><h3 style="font-weight:bolder">{{ category.title }}</h3></a></li>
+                {% endfor %}
+            </ul></div>
+    </div>
+
+
+
+
+</header>

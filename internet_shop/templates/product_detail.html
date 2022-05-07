@@ -1,0 +1,300 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+                        
+{% block detail %}
+
+    <main>
+    <div class="block main">
+        <div class="inner">
+
+
+            <div class="content nositebar ">
+
+    <script>
+        window.item_discount = '0.00';
+        if (window.item_discount == '0.00') {
+            window.item_discount = 0
+        }
+        window.discount_type = 'percent';
+    </script>
+
+
+<div class="breadcrumb">
+    <span><a href="/">Главная</a>/</span>
+        <span><a href="/categories/zhidkie-chehly-s-blestkami/">{{ product.category.title }}</a>/</span>
+    <span>{{ product.title }}</span>
+</div>
+
+
+<div class="item_preview">
+    <div class="left">
+        <div class="extra_image">
+            <div class="swiper gallery-thumbs">
+                <div class="swiper-wrapper">
+                                                                        <div class="swiper-slide">
+                                <img
+                                    class="elevatezoom-gallery"
+                                    data-update="" data-image="{{ product.image.url }}"
+                                    data-zoom-image="{{ product.image.url }}" data-color="0"
+                                    src="{{ product.image.url }}"
+                                    width="100px" height="100px"
+                                    />
+                            </div>
+
+                                    </div>
+            </div>
+        </div>
+        <div class="image">
+            <div class="item_tags">
+                                    <div class="bestseller">Хит продаж</div>
+                                                                            </div>
+            <div class="zoom">
+                <i class="fas fa-search-plus"></i>
+            </div>
+            <div class="swiper gallery-top">
+                <div class="cancel">
+                    <i class="fas fa-search-minus"></i>
+                </div>
+                <div class="swiper-wrapper">
+                                                                        <div class="swiper-slide offer_image_0">
+                                <img
+                                    class="big swiper-lazy"
+                                    data-zoom-image="{{ product.image.url }}"
+                                    data-color="0"
+                                    data-src="{{ product.image.url }}"
+                                    src="{{ product.image.url }}"
+                                    width="800px" height="800px"
+                                    />
+                                <div class="swiper-lazy-preloader swiper-lazy-preloader-black"></div>
+                            </div>
+
+                                    </div>
+                <div class="swiper-button-next swiper-button-white"></div>
+                <div class="swiper-button-prev swiper-button-white"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="right">
+        <h1 class="item_title">{{ product.title }}</h1>
+
+        <div class="right_top">
+            <div class="availability exist">В наличии</div>
+                            <div class="code v_code">ID товара:
+                    <span class="vendor_or_id">{{ product.id }}</span>
+                </div>
+                        <div class="add_favorite" data-price="{{ product.price }}" data-id="{{ product.id }}" data-title="{{ product.title }}" data-link="/items/zhidkij-chekhol-s-blestkami-prozrachnyj-na-xiaomi-redmi-note-5-note-5-pro/" data-image="/img/150x0/3234/items/14_1586265961.jpg">
+                <i data-feather="heart"></i><span></span>
+            </div>
+        </div>
+
+        <div class="item_short_description">{{ product.title }}</div>
+
+
+            <div class="item_price" data-discount="0.00" data-discount-type="percent">
+
+                <form action="{% url 'add_basket' %}" method="get">
+                    <input type="hidden" name="price" value="{{ product.price }}"/>
+                    <input type="hidden" name="offer_id" value="{{ product.id }}"/>
+                    <input style="width:200px" type="number" name="cost" value="1"/>
+
+                    <button style="height:100px;width:400px;background-color:orange">
+                        <h1>В корзину</h1>
+                    </button>
+                </form>
+
+
+
+            </div>
+
+
+
+        <div class="properties">
+            <div class="properties_basis">
+                <div class="item_properties_title">Свойства {{ product.title }}</div>
+                                    <div class="prop_row">
+                        <div class="prop_title">Производитель</div>
+                        <div class="separator_tabulator"></div>
+                        <div class="prop_val">
+                            <a href="/manufacturers/color-ipress/">Color Ipress</a>
+                        </div>
+                    </div>
+                                                                                    <div class="prop_row">
+                        <div class="prop_title">Единица измерения</div>
+                        <div class="separator_tabulator"></div>
+                        <div class="prop_val">шт.</div>
+                    </div>
+                            </div>
+                                                                        <div class="prop_row">
+                            <div class="prop_title">Материал чехла</div>
+                            <div class="separator_tabulator"></div>
+                            <div class="prop_val">Силикон</div>
+                        </div>
+                                                                                <div class="prop_row">
+                            <div class="prop_title">Универсальный</div>
+                            <div class="separator_tabulator"></div>
+                            <div class="prop_val">Нет</div>
+                        </div>
+                                                        </div>
+
+    </div>
+</div>
+
+<div class="main description">
+    <h3>{{ product.title }}</h3>
+    <div class="item_description">
+                    <p>{{ product.description }}</p>
+
+            </div>
+</div>
+                <h2 class="shop-title">Рекомендуем посмотреть</h2>
+    <div class="items equivalent_items">
+
+{% for product_add in product.category.get_products %}
+                {% if product_add != product %}
+
+
+
+
+<div class="item "
+     data-discount-type=""
+
+     data-code="{{ product_add.id }}"
+
+      >
+
+    <div class="image">
+        <div class="item_tags">
+            <div class="bestseller">Хит продаж</div>                                            </div>
+        <div class="bg_dark"></div>
+
+        <!-- item images -->
+
+                    <!-- default image loading -->
+                            <img src="{{ product_add.image.url }}" alt="Жидкий чехол для Asus черный" width="210px" height="210px" loading="lazy" />
+
+
+        <a href="{{ product.get_absolute_url }}"></a>
+    </div>
+    <div class="item_content " data-discount="">
+        <a class="item_link descr" href="{{ product_add.get_absolute_url }}">{{ product_add.title }}</a>
+        <div class="short_descr">{{ product_add.description }}</div>
+                                                <div class="item_price_big">
+                    <span class="new">{{ product_add.price }} руб.</span>
+                </div>
+                            <div class="btn_wrapp">
+                            <a class="more" href="{{ product_add.get_absolute_url }}">Подробнее</a>
+                    </div>
+    </div>
+</div>
+
+
+        {% endif %}
+        {% endfor %}
+
+    </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="{% static 'js/zoomer.js' %}" type="text/javascript"></script>
+
+
+
+
+        <script type="module">
+            import Swiper from 'https://unpkg.com/swiper@7/swiper-bundle.esm.browser.min.js';
+
+            $(function () {
+
+                var galleryThumbs = new Swiper('.gallery-thumbs', {
+                    direction: 'vertical',
+                    slidesPerView: 5,
+                    spaceBetween: 30,
+                    freeMode: true,
+                    mousewheel: true,
+                    watchSlidesProgress: true,
+                });
+                var galleryTop = new Swiper('.gallery-top', {
+                    lazy: true,
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    thumbs: {
+                        swiper: galleryThumbs,
+                    },
+                });
+
+                $('.zoom').click(function() {
+                    $(this).hide();
+                    setTimeout(function() {
+                        galleryTop.update();
+                    }, 100);
+                    $('.image').addClass('active');
+                    $('.gallery-top .cancel').show();
+                    $('body').addClass('modal');
+                });
+                $('.gallery-top .cancel').click(function() {
+                    $(this).hide();
+                    $('.image .zoom').show();
+                    $('.image').removeClass('active');
+                    setTimeout(function() {
+                        galleryTop.update();
+                    }, 100);
+                    $('body').removeClass('modal');
+                });
+
+                var favorites = window.addshop.storage.getProp('favorites');
+                var is_in_favorites = false;
+                $.each(favorites, function(index, el) {
+                    if (window.item.id == el.id) {
+                        is_in_favorites = true;
+                    }
+                });
+                if (is_in_favorites) {
+                    $('.add_favorite').addClass('active');
+                    $('.add_favorite span').text('В избранном');
+                }
+            });
+        </script>
+
+
+
+
+        <!-- ym start -->
+
+        <!-- ym end -->
+
+        <!-- ym start -->
+
+        <!-- ym end -->
+
+        <!-- vkpixel start -->
+
+        <!-- vkpixel end -->
+
+        <!-- fbpixel start -->
+
+        <!-- fbpixel end -->
+
+        <!-- jivosite start -->
+
+        <!-- jivosite end -->
+
+        <!-- callbackhunter  start -->
+
+        <!-- callbackhunter  end -->
+
+        <!-- roistat  start -->
+
+        <!-- roistat  end -->
+
+{% endblock detail %}
+            
+        
+        
