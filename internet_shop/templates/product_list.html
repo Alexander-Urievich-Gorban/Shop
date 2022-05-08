@@ -4,84 +4,74 @@
 {% block content %}
 
 
- <main>
+<main>
     <div class="block main">
         <div class="inner">
             <div class="content  ">
-{% get_category as categories %}
+                {% get_category as categories %}
 
-{% for category in categories %}
-
-
+                {% for category in categories %}
 
 
-                <h2 class="items-title"><a href="{{ category.get_absolute_url }}"><span>{{ category.title }}</span></a></h2>
+                <h2 class="items-title"><a href="{{ category.get_absolute_url }}"><span>{{ category.title }}</span></a>
+                </h2>
 
-            <div class="swiper s17925">
-                <div class="swiper-wrapper items">
-    {% for product in product_list %}
+                <div class="swiper s17925">
+                    <div class="swiper-wrapper items">
+                        {% for product in product_list %}
 
-                {% if category == product.category %}
-
-
-
+                        {% if category == product.category %}
 
 
+                        <div class="item swiper-slide"
+                             data-discount-type="percent"
+                             data-discount="0.00"
+                             data-code="{{ product.id }}"
+
+                        >
+
+                            <div class="image">
+                                <div class="item_tags">
+                                    <div class="bestseller">Хит продаж</div>
+                                </div>
+                                <div class="bg_dark"></div>
+
+                                <!-- item images -->
+
+                                <!-- lazy image loading -->
+                                <img
+                                        class="swiper-lazy"
+                                        data-src="{{ product.image.url }}"
+                                        src="{{ product.image.url }}"
+                                        alt="Жидкий чехол для LG зеленый"
+                                        width="300px"
+                                        height="300px"
+                                        loading="lazy"
+                                />
+                                <div class="swiper-lazy-preloader swiper-lazy-preloader-black"></div>
 
 
-<div class="item swiper-slide"
-     data-discount-type="percent"
-     data-discount="0.00"
-     data-code="{{ product.id }}"
-
-      >
-
-    <div class="image">
-        <div class="item_tags">
-            <div class="bestseller">Хит продаж</div>                                            </div>
-        <div class="bg_dark"></div>
-
-        <!-- item images -->
-
-                    <!-- lazy image loading -->
-                                                                        <img
-                            class="swiper-lazy"
-                            data-src="{{ product.image.url }}"
-                            src="{{ product.image.url }}"
-                            alt="Жидкий чехол для LG зеленый"
-                            width="300px"
-                            height="300px"
-                            loading="lazy"
-                            />
-                                                            <div class="swiper-lazy-preloader swiper-lazy-preloader-black"></div>
+                                <a href="{{ product.get_absolute_url }}"></a>
+                            </div>
+                            <div class="item_content " data-discount="0.00">
+                                <a class="item_link descr" href="{{ product.get_absolute_url }}">{{ product.title }}</a>
+                                <div class="short_descr">{{ product.description }}</div>
+                                <div class="item_price_big">
+                                    <span class="new">{{ product.price }} руб.</span>
+                                </div>
+                                <div class="btn_wrapp">
+                                    <a class="more" href="{{ product.get_absolute_url }}">Подробнее</a>
+                                </div>
+                            </div>
+                        </div>
 
 
-        <a href="{{ product.get_absolute_url }}"></a>
-    </div>
-    <div class="item_content " data-discount="0.00">
-        <a class="item_link descr" href="{{ product.get_absolute_url }}">{{ product.title }}</a>
-        <div class="short_descr">{{ product.description }}</div>
-                                                <div class="item_price_big">
-                    <span class="new">{{ product.price }} руб.</span>
-                </div>
-                            <div class="btn_wrapp">
-                            <a class="more" href="{{ product.get_absolute_url }}">Подробнее</a>
+                        <!-- item images -->
+                        {% endif %}
+                        {% endfor %}
                     </div>
-    </div>
-</div>
-
-
-
-
-
-
-
-                            <!-- item images -->
-{% endif %}
                     {% endfor %}
                 </div>
-                    {% endfor %}
-            </div>
             </div>
         </div>
     </div>
@@ -89,4 +79,4 @@
 
 </main>
 
-  {% endblock content %}
+{% endblock content %}
